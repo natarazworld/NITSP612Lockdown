@@ -5,18 +5,17 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>nit</groupId>
-  <artifactId>DAOPRoject5-EmpSerachWebApp</artifactId>
+  <artifactId>DAOProj6-JdbcTemplate-CallbackInterfaces</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
 
-  <name>DAOPRoject5-EmpSerachWebApp Maven Webapp</name>
+  <name>DAOProj6-JdbcTemplate-CallbackInterfaces</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.9</maven.compiler.source>
+    <maven.compiler.target>1.9</maven.compiler.target>
   </properties>
 
   <dependencies>
@@ -34,31 +33,22 @@
     <version>5.2.7.RELEASE</version>
 </dependency>
     
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+
+    <!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
+<dependency>
+    <groupId>com.zaxxer</groupId>
+    <artifactId>HikariCP</artifactId>
+    <version>3.4.5</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-jdbc</artifactId>
     <version>5.2.7.RELEASE</version>
 </dependency>
-    <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-<dependency>
-    <groupId>javax.servlet</groupId>
-    <artifactId>javax.servlet-api</artifactId>
-    <version>4.0.1</version>
-    <scope>provided</scope>
-</dependency>
-    <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
-<dependency>
-    <groupId>javax.servlet</groupId>
-    <artifactId>jstl</artifactId>
-    <version>1.2</version>
-</dependency>
-    <!-- https://mvnrepository.com/artifact/taglibs/standard -->
-<dependency>
-    <groupId>taglibs</groupId>
-    <artifactId>standard</artifactId>
-    <version>1.1.2</version>
-</dependency>
+
+    
     <!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc8 -->
 <dependency>
     <groupId>com.oracle.database.jdbc</groupId>
@@ -66,18 +56,17 @@
     <version>19.6.0.0</version>
 </dependency>
     
-    
   </dependencies>
 
   <build>
-    <finalName>DAOPRoject5-EmpSerachWebApp</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
+        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>
         </plugin>
-        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.0.2</version>
@@ -91,8 +80,8 @@
           <version>2.22.1</version>
         </plugin>
         <plugin>
-          <artifactId>maven-war-plugin</artifactId>
-          <version>3.2.2</version>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
@@ -101,6 +90,15 @@
         <plugin>
           <artifactId>maven-deploy-plugin</artifactId>
           <version>2.8.2</version>
+        </plugin>
+        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.0.0</version>
         </plugin>
       </plugins>
     </pluginManagement>

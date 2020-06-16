@@ -56,6 +56,7 @@ public class MainControllerServlet extends HttpServlet {
 		  e.printStackTrace();
 		  //keep eexception related error messages in request attribute
 		  req.setAttribute("errorMsg",e.getMessage());
+		  System.out.println("12345.....");
 		//forward to error page
 		  rd=req.getRequestDispatcher("/error.jsp");
 		  rd.forward(req,res);
