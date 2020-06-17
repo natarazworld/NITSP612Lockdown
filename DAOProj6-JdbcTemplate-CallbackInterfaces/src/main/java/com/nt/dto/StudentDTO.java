@@ -3,11 +3,18 @@ package com.nt.dto;
 import java.io.Serializable;
 
 public class StudentDTO implements Serializable{
+	private int srNo;
 	private int sno;
 	private String sname;
 	private String sadd;
-	private  float avg;
+	private  int avg;
 	
+	public int getSrNo() {
+		return srNo;
+	}
+	public void setSrNo(int srNo) {
+		this.srNo = srNo;
+	}
 	public int getSno() {
 		return sno;
 	}
@@ -26,17 +33,20 @@ public class StudentDTO implements Serializable{
 	public void setSadd(String sadd) {
 		this.sadd = sadd;
 	}
-	public float getAvg() {
+	public int getAvg() {
 		return avg;
 	}
-	public void setAvg(float avg) {
+	public void setAvg(int avg) {
 		this.avg = avg;
 	}
 	
 	@Override
 	public String toString() {
-		return "StudentDTO [sno=" + sno + ", sname=" + sname + ", sadd=" + sadd + ", avg=" + avg + "]";
+		return "StudentDTO [srNo=" + srNo + ", sno=" + sno + ", sname=" + sname + ", sadd=" + sadd + ", avg=" + avg
+				+ "]";
 	}
+	
+	
 	
 	
 

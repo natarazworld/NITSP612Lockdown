@@ -6,5 +6,6 @@ import java.util.Map;
 public interface EmployeeDAO {
 	
 	public  List<Map<String,Object>>  getEmpsByDesgs(String cond);
+  
 
 }

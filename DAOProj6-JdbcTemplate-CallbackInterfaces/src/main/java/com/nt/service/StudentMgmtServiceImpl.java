@@ -1,5 +1,8 @@
 package com.nt.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,4 +28,21 @@ public class StudentMgmtServiceImpl implements StudentMgmtService {
 		return dto;
 	}
 
-}
+	@Override
+	public List<StudentDTO> fetchStudentByAddrs(String addrs) {
+		List<StudentBO> listBO=null;
+		List<StudentDTO> listDTO=new ArrayList();
+		//use DAO
+		listBO=dao.getStudentsByAddrs(addrs);
+		//convert listBO to listDTO
+		listBO.forEach(bo->{
+			StudentDTO dto=new StudentDTO();
+			BeanUtils.copyProperties(bo, dto, "avg");
+			dto.setAvg(Math.round(bo.getAvg()));
+		    dto.setSrNo(listDTO.size()+1);	
+		    listDTO.add(dto);
+		});
+		return listDTO;
+	}//method
+
+}//class
