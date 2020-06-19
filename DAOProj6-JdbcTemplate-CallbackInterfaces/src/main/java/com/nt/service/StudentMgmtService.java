@@ -8,5 +8,6 @@ public interface StudentMgmtService {
 	
 	public  StudentDTO  fetchStudentById(int no);
 	public List<StudentDTO> fetchStudentByAddrs(String addrs);
+	public  List<StudentDTO> fetchStudentsByCity(String city);
 
 }

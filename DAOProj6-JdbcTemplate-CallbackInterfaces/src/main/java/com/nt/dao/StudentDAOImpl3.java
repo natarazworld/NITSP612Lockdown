@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
 import com.nt.bo.StudentBO;
@@ -15,6 +16,8 @@ import com.nt.bo.StudentBO;
 //@Repository("studDAO")
 public class StudentDAOImpl3 implements StudentDAO {
 	private static final  String GET_STUDENT_BY_NO="SELECT SNO,SNAME,SADD,AVG FROM  STUDENT WHERE SNO=?";
+	private static final  String GET_STUDENTS_BY_ADDRS="SELECT SNO,SNAME,SADD,AVG FROM  STUDENT WHERE SADD=?";
+	
 	@Autowired
 	private JdbcTemplate jt;
 
@@ -29,6 +32,16 @@ public class StudentDAOImpl3 implements StudentDAO {
 
 	@Override
 	public List<StudentBO> getStudentsByAddrs(String addrs) {
+		List<StudentBO> listBO=null;
+		listBO=  jt.query(GET_STUDENTS_BY_ADDRS,
+				        new RowMapperResultSetExtractor<StudentBO>(new BeanPropertyRowMapper<StudentBO>(StudentBO.class))
+				        ,
+				        addrs);
+		return listBO;
+	}
+
+	@Override
+	public List<StudentBO> getStudentsByCity(String city) {
 		// TODO Auto-generated method stub
 		return null;
 	}

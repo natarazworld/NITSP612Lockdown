@@ -45,4 +45,21 @@ public class StudentMgmtServiceImpl implements StudentMgmtService {
 		return listDTO;
 	}//method
 
+	@Override
+	public List<StudentDTO> fetchStudentsByCity(String city) {
+		List<StudentBO> listBO=null;
+		List<StudentDTO> listDTO=new ArrayList();
+		//use DAO
+		listBO=dao.getStudentsByCity(city);
+		//convert listBO to listDTO
+		listBO.forEach(bo->{
+			StudentDTO dto=new StudentDTO();
+			BeanUtils.copyProperties(bo, dto, "avg");
+			dto.setAvg(Math.round(bo.getAvg()));
+		    dto.setSrNo(listDTO.size()+1);	
+		    listDTO.add(dto);
+		});
+		return listDTO;
+	}
+
 }//class

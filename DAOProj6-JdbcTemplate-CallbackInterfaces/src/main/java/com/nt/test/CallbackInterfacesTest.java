@@ -23,6 +23,7 @@ public class CallbackInterfacesTest {
 		ctx=new ClassPathXmlApplicationContext("com/nt/cfgs/applicationContext.xml");
 		//get Bean
 		service=ctx.getBean("studService",StudentMgmtService.class);
+		System.out.println("------------------(1)----------");
 		try {
 			dto=service.fetchStudentById(8901);
 			System.out.println(dto);
@@ -30,7 +31,7 @@ public class CallbackInterfacesTest {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("..........................");
+		System.out.println("..............(2)............");
 		try {
 			listDTO=service.fetchStudentByAddrs("hyd");
 			/*###forEach
@@ -44,9 +45,8 @@ public class CallbackInterfacesTest {
 				System.out.println(dto1);
 			});
 			*/
-			
 			//## method reference
-			//listDTO.forEach(System.out::println);
+			listDTO.forEach(System.out::println);
 			 //System.out.println("...............");
 			
 			//##method refercne
@@ -56,19 +56,23 @@ public class CallbackInterfacesTest {
 			//System.out.println(listDTO.stream().collect(Collectors.toList()));
 			//System.out.println(listDTO);
 			//System.out.println("-----------------");
-			
 			//###collectors to convert list to set
 			//Set<StudentDTO> setDTO=listDTO.stream().collect(Collectors.toSet());	
 			//System.out.println(setDTO);
 	
 			//# stream api + filter +method reference
-			listDTO.stream().filter((avg)->avg.getAvg()>70).forEach(System.out::println);
+			//listDTO.stream().filter((avg)->avg.getAvg()>70).forEach(System.out::println);
 			
 			
 		}//try
 		catch(DataAccessException dae) {
 			dae.printStackTrace();
 		}
+		
+		System.out.println(".................(3).......................");
+		listDTO=service.fetchStudentsByCity("hyd");
+		listDTO.forEach(System.out::println);
+		
 		
 		//close container
 		((AbstractApplicationContext) ctx).close();

@@ -8,6 +8,7 @@ public interface StudentDAO {
 	
 	public  StudentBO  getStudentById(int no);
 	public  List<StudentBO>   getStudentsByAddrs(String addrs);
+	public  List<StudentBO>   getStudentsByCity(String city);
 	
 
 }

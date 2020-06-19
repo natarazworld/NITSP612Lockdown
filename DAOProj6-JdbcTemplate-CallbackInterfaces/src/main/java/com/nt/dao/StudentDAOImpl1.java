@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +19,7 @@ import com.nt.bo.StudentBO;
 public class StudentDAOImpl1 implements StudentDAO {
 	private static final  String GET_STUDENT_BY_NO="SELECT SNO,SNAME,SADD,AVG FROM  STUDENT WHERE SNO=?";
 	private static final  String GET_STUDENTS_BY_ADDRS="SELECT SNO,SNAME,SADD,AVG FROM  STUDENT WHERE SADD=?";
+	private static final  String GET_STUDENTS_BY_CITY="SELECT SNO,SNAME,SADD,AVG FROM  STUDENT WHERE SADD=?";
 	
 	@Autowired
 	private JdbcTemplate jt;
@@ -52,7 +54,9 @@ public class StudentDAOImpl1 implements StudentDAO {
 				        new ResultSetExtractor<List<StudentBO>>() {
 							@Override
 							public List<StudentBO> extractData(ResultSet rs) throws SQLException, DataAccessException {
-							  List<StudentBO> listBO=null;
+							  System.out.println(
+									"StudentDAOImpl1.getStudentsByAddrs(...).new ResultSetExtractor() {...}.extractData()");
+								List<StudentBO> listBO=null;
 							  StudentBO bo=null;
 							  listBO=new ArrayList();
 							  while(rs.next()) {
@@ -73,4 +77,28 @@ public class StudentDAOImpl1 implements StudentDAO {
 		return listBO;
 	}//method
 
-}//class
+	@Override
+	public List<StudentBO> getStudentsByCity(String city) {
+		List<StudentBO> listBO=new ArrayList();
+	
+		jt.query(GET_STUDENTS_BY_CITY,
+				 new RowCallbackHandler() {
+					@Override
+					public void processRow(ResultSet rs) throws SQLException {
+					   System.out.println(
+							"StudentDAOImpl1.getStudentsByCity(...).new RowCallbackHandler() {...}.processRow()");
+						StudentBO bo=null;
+						bo=new StudentBO();
+						bo.setSno(rs.getInt(1));
+						bo.setSname(rs.getString(2));
+						bo.setSadd(rs.getString(3));
+						bo.setAvg(rs.getFloat(4));
+					    listBO.add(bo);			
+					}//processRow
+		},
+	     city);
+				
+		return listBO;
+	}//method
+
+}//outer class
