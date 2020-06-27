@@ -1,0 +1,16 @@
+CREATE TABLE "SYSTEM"."USERLIST" 
+   (	"UNAME" VARCHAR2(15 BYTE), 
+	"PWD" VARCHAR2(15 BYTE), 
+	 PRIMARY KEY ("UNAME"));
+	 =============================
+	 CREATE OR REPLACE PROCEDURE P_AUTHENTICATION(username in varchar2,password in varchar2,result out varchar2) AS 
+   cnt  number(5);
+BEGIN
+   SELECT COUNT(*) INTO cnt FROM USERLIST WHERE UNAME=username AND  PWD=password;
+   if(cnt<>0) then
+        result:='VALID CREDENTIALS';
+        else
+        result:='INVALID CREDENTIALS';
+     end if;   
+END P_AUTHENTICATION;
+============================================================
