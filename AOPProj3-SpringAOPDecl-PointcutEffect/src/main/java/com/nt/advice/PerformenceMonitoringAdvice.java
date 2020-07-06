@@ -12,12 +12,15 @@ public class PerformenceMonitoringAdvice implements MethodInterceptor {
 		
 		long start=0,end=0;
 		Object retVal=null;
-		System.out.println("pre");
+        if(invocation.getMethod().getName().equalsIgnoreCase("calcCompoundIntrestAmount")) {
 		start=System.currentTimeMillis(); //pre-logic
-		retVal=invocation.proceed(); //invokes the method
-		System.out.println("post");
+		  retVal=invocation.proceed(); //invokes the method
 		end=System.currentTimeMillis(); //post logic
 		System.out.println(invocation.getMethod().getName()+" with args "+Arrays.toString(invocation.getArguments())+" has taken "+(end-start)+" ms");
+        }
+        else {
+        	retVal=invocation.proceed();
+        }
 		
 		return retVal;
 	}

@@ -9,7 +9,7 @@ public class PerformenceMonitoringAdvice implements MethodInterceptor {
 
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
-		
+		System.out.println("PerformenceMonitoringAdvice.invoke()"+ invocation.getClass());
 		long start=0,end=0;
 		Object retVal=null;
 		System.out.println("pre");

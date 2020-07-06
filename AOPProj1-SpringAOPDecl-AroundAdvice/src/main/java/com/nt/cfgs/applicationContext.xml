@@ -3,8 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
   
-  <!-- configure advice class -->
+  <!-- configure advice classes -->
   <bean id="pmAdvice"   class="com.nt.advice.PerformenceMonitoringAdvice"/>
+  <bean id="loggingAdvice"  class="com.nt.advice.AroundLoggingAdvice"/>
+  <bean id="cacheAdvice"   class="com.nt.advice.CacheAdvice"/>
   
   <!-- Configure target class -->
   <bean id="bankService"  class="com.nt.service.BankService"/>
@@ -14,7 +16,9 @@
      <property name="target" ref="bankService"/>
      <property name="interceptorNames">
         <array>
-         <!--  <value>pmAdvice</value> -->
+         <value>cacheAdvice</value>
+         <value>loggingAdvice</value>
+          <value>pmAdvice</value>
         </array>
      
      </property>

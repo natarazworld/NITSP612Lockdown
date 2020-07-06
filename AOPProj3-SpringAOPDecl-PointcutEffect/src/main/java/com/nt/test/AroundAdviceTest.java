@@ -18,6 +18,7 @@ public class AroundAdviceTest {
 		ctx=new ClassPathXmlApplicationContext("com/nt/cfgs/applicationContext.xml");
 		//call getBean(-) to Proxy class object
 		proxy=ctx.getBean("pfb",BankService.class);
+		System.out.println(Arrays.deepToString(proxy.getClass().getDeclaredMethods()));
 		try {
 		  System.out.println("1Simple Intrest Amount::"+proxy.calcSimpleIntrestAmount(100000, 2,12 ));
 		  System.out.println(".........................");
