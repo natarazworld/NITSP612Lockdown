@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+  
+  <!-- configure advice classes -->
+  <bean id="pmAdvice"   class="com.nt.advice.PerformenceMonitoringAdvice"/>
+  <bean id="cacheAdvice"  class="com.nt.advice.CacheAdvice"/>
+  <bean id="logAdvice"  class="com.nt.advice.AroundLoggingAdvice"/>
+  
+  <!-- Configure target class -->
+  <bean id="bankService"  class="com.nt.service.BankService"/>
+  
+  
+  <!-- Cfg  static Pointcut class (user-defined) -->
+  <bean id="ptc1"  class="com.nt.pointcut.CommonStaticPtc">
+      <property name="methodName" value="calcSimpleIntrestAmount"/>
+      <property name="clazz"  value="com.nt.service.BankService"/>
+  </bean>
+  
+  <!-- Cfg  dynamic Pointcut class (user-defined) -->
+  <bean id="ptc3"  class="com.nt.pointcut.CommonDynaPTC">
+      <property name="methodName" value="calcCompoundIntrestAmount"/>
+      <property name="clazz"  value="com.nt.service.BankService"/>
+      <property name="pAmtRanage" value="100001"/>
+  </bean>
+  
+  <!-- Concreate static pointcut (concrete class) -->
+ <!--  <bean id="ptc2" class="org.springframework.aop.support.NameMatchMethodPointcut">
+     <property name="mappedName" value="calcCompoundIntrestAmount"/>
+  </bean>
+   -->
+  <!-- Cfg Advisors -->
+   <bean id="advsr1"  class="org.springframework.aop.support.DefaultPointcutAdvisor">
+         <property name="advice"  ref="pmAdvice"/>
+         <property name="pointcut" ref="ptc1"/>
+   </bean>
+  <!--  <bean id="advsr2" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+           <property name="advice" ref="cacheAdvice"/>
+           <property name="pointcut" ref="ptc2"/>
+   </bean>
+   --> 
+   <bean id="advsr2"  class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+      <property name="mappedName" value="calcCompoundIntrestAmount"/>
+      <property name="advice" ref="cacheAdvice"/>
+   </bean>
+   
+   <bean id="advsr3" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+           <property name="advice" ref="logAdvice"/>
+           <property name="pointcut" ref="ptc3"/>
+          
+   </bean>
+  
+  <!-- Cfg ProxyFactoryBean to generate Proxy class  and to return its object -->
+  <bean id="pfb" class="org.springframework.aop.framework.ProxyFactoryBean">
+     <property name="target" ref="bankService"/>
+     <property name="interceptorNames">
+        <array>
+           <value>advsr2</value>
+          <value>advsr1</value>
+          <value>advsr3</value>
+        </array>
+     
+     </property>
+  </bean>
+   
+   
+
+</beans>
