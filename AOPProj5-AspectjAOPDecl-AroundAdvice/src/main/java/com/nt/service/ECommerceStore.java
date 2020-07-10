@@ -10,11 +10,13 @@ import com.nt.dto.ProductDTO;
 public class ECommerceStore {
 	private List<ProductDTO> cartList=new ArrayList();
 	
+	//method
 	public String addItemToCart(ProductDTO dto) {
 		cartList.add(dto);
         return dto.getPname()+" is added to Cart";
 	}
 	
+	//method2
 	public  void showCartItems(){
 		System.out.println("All Items added to the cart");
 		cartList.forEach(System.out::println);
@@ -25,16 +27,17 @@ public class ECommerceStore {
 		 //cartList.stream().forEach(System.out::println);
 	}
 	
-	public  double calcBillAmount(float cuponDiscount) {
-		
-		  double bamt=cartList.stream().mapToDouble(dto->
+	//method3
+	public  float calcBillAmount(float cuponDiscount) {
+		    float bamt=0.0f;
+		    float finalAmount=0.0f;
+			 bamt=(float)cartList.stream().mapToDouble(dto->
 		          dto.getPrice()* dto.getQty()).sum();
-				 
+		finalAmount=bamt-(bamt*(cuponDiscount/100.0f));		 
 		  
-		return bamt;
+		return finalAmount;
 		
-	 	/*finalAmount=Double.valueOf(bamt.toString())-(Double.valueOf(bamt.toString())* (cuponDiscount/100));
-	 	return finalAmount;*/
+	 	
 	}
 
 }

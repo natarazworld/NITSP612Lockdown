@@ -8,6 +8,26 @@
    <!-- configure  target class -->
    <bean id="store" class="com.nt.service.ECommerceStore"/>
    
+   <!-- cfg Advice classes -->
+   <bean id="pmAspect"  class="com.nt.aspect.PerformenceMonitoringAspect"/>
+   <bean id="cacheAspect" class="com.nt.aspect.CachingAspect"/>
+   
+   <!-- enable AspectjAOP -->
+   <aop:config>
+     <!-- pointcut expression -->
+     <aop:pointcut expression="execution(* com.nt.service.ECommerceStore.*(..))" id="ptc"/>
+   
+     <!-- make spring bean as aspectj aop advice -->
+     <aop:aspect ref="pmAspect">
+         <aop:around method="monitor" pointcut-ref="ptc" />
+     </aop:aspect>
+     <!-- make spring bean as aspectjaop advice -->
+     <aop:aspect ref="cacheAspect">
+        <aop:around method="caching" pointcut="execution(float com.nt.service.ECommerceStore.calc*(..))"/>
+     </aop:aspect>
+     
+   </aop:config>
+   
    
 
 </beans>
