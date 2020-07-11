@@ -32,9 +32,6 @@ public class AspectjAOPAroundTest {
 		 proxy.showCartItems();
 		 System.out.println(".............................");
 		 System.out.println("Bill Amount::"+proxy.calcBillAmount(5));
-		 p3=new ProductDTO();
-			p3.setPid(1); p3.setPname("TV"); p3.setPrice(new Float(100000));p3.setQty(new Float(1));
-			System.out.println(proxy.addItemToCart(p3));
 		 System.out.println("Bill Amount::"+proxy.calcBillAmount(5));
 		}
 		catch(Exception e) {
