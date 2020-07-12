@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 import com.nt.dto.ProductDTO;
 
-public class ECommerceStore {
+public  class ECommerceStore{ // implements IECommerceStore {
 	private List<ProductDTO> cartList=new ArrayList();
 	
 	//method
