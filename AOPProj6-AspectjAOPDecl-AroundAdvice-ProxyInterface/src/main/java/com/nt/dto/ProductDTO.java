@@ -2,13 +2,15 @@ package com.nt.dto;
 
 import java.io.Serializable;
 //@Data ---> if lombok is configured..
+
+
 public class ProductDTO implements Serializable {
 	private int pid;
 	private String pname;
 	private Float price;
 	private Float qty;
 	
-	
+     
 	public int getPid() {
 		return pid;
 	}
