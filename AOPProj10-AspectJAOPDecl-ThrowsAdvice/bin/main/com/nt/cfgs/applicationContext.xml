@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd">
+   <!-- cfg taget class -->
+   <bean id="shopping" class="com.nt.service.ShoppingStore"/>
+   <!-- Cfg ASpect class -->
+   <bean id="expAspect" class="com.nt.aspect.CommonExceptionLoggerAspect"/>
+   
+   <!-- enable aspectjAOP -->
+   <aop:config>
+       <aop:pointcut expression="execution(float com.nt.service.ShoppingStore.calculateSingleProductBillAmt(..))" id="ptc"/>
+       
+       <aop:aspect ref="expAspect">
+          <aop:after-throwing  method="exceptionLogger" pointcut-ref="ptc" throwing="ex" />
+       </aop:aspect>
+    
+   </aop:config>
+   
+   
+</beans>
