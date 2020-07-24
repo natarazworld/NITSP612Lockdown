@@ -19,18 +19,18 @@ public class CommonExceptionLoggerAspect {
 		}
 	}
 	
-	public void   exceptionLogger(JoinPoint jp,IllegalArgumentException ex,int x) {
+	public void   exceptionLogger(JoinPoint jp,Exception ex) {
 		System.out.println("1");
 		logger.error(ex+ " exception is raised in  "+jp.getSignature()+ " method with args"+Arrays.deepToString(jp.getArgs()));
 	}
 	
-	public void   exceptionLogger(JoinPoint jp,Exception ex,int x) {
-		System.out.println("2");
-		logger.error(ex+ " exception is raised in  "+jp.getSignature()+ " method with args"+Arrays.deepToString(jp.getArgs()));
-	}
-	
-	public void   exceptionLogger(JoinPoint jp,Throwable ex,int x) {
-		System.out.println("3");
-		logger.error(ex+ " exception is raised in  "+jp.getSignature()+ " method with args"+Arrays.deepToString(jp.getArgs()));
-	}
+	/*	public void   exceptionLogger(JoinPoint jp,Exception ex) {
+			System.out.println("2");
+			logger.error(ex+ " exception is raised in  "+jp.getSignature()+ " method with args"+Arrays.deepToString(jp.getArgs()));
+		}
+		
+		public void   exceptionLogger(JoinPoint jp,Throwable ex) {
+			System.out.println("3");
+			logger.error(ex+ " exception is raised in  "+jp.getSignature()+ " method with args"+Arrays.deepToString(jp.getArgs()));
+		}*/
 }

@@ -1,0 +1,2 @@
+2020-07-23-main-0-ERROR-com.nt.aspect.CommonExceptionLoggerAspect:java.lang.IllegalArgumentException: Invalid inputs exception is raised in  float com.nt.service.ShoppingStore.calculateSingleProductBillAmt(float,float) method with args[10000.0, 0.0]
+  

@@ -9,15 +9,21 @@
    <!-- cfg taget class -->
    <bean id="shopping" class="com.nt.service.ShoppingStore"/>
    <!-- Cfg ASpect class -->
-   <bean id="expAspect" class="com.nt.aspect.CommonExceptionLoggerAspect"/>
+   <bean id="expLoggerAspect" class="com.nt.aspect.CommonExceptionLoggerAspect"/>
+   <bean id="expGrapherAspect" class="com.nt.aspect.CommonExceptionGrapherAspect"/>
    
    <!-- enable aspectjAOP -->
    <aop:config>
        <aop:pointcut expression="execution(float com.nt.service.ShoppingStore.calculateSingleProductBillAmt(..))" id="ptc"/>
        
-       <aop:aspect ref="expAspect">
+       <aop:aspect ref="expLoggerAspect" order="1">
           <aop:after-throwing  method="exceptionLogger" pointcut-ref="ptc" throwing="ex" />
        </aop:aspect>
+       
+       <aop:aspect ref="expGrapherAspect"   order="2">
+          <aop:after-throwing  method="exceptionGraphing" pointcut-ref="ptc" throwing="iae" />
+       </aop:aspect>
+    
     
    </aop:config>
    
