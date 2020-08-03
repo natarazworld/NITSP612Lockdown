@@ -19,7 +19,13 @@ public final class BankMgmtServiceImpl implements BankMgmtService {
 	//@Transactional(propagation = Propagation.REQUIRED,timeout =10,rollbackForClassName ="java.lang.IllegalAccessExeception")
 	//@Transactional(propagation = Propagation.REQUIRED,timeout =10,noRollbackFor = IllegalArgumentException.class)
 	//@Transactional(propagation = Propagation.REQUIRED,transactionManager = "dsTxMgmr")
-	@Transactional(propagation = Propagation.REQUIRED)
+	//@Transactional(propagation = Propagation.REQUIRED)
+	//@Transactional(propagation = Propagation.SUPPORTS)
+	//@Transactional(propagation = Propagation.REQUIRES_NEW)
+	//@Transactional(propagation = Propagation.NOT_SUPPORTED)
+	//@Transactional(propagation = Propagation.MANDATORY)
+	//@Transactional(propagation = Propagation.NEVER)
+	@Transactional
 	public String transferMoney(long srcAcno, long destAcno, float amt) throws IllegalAccessException {
 		int count1=0,count2=0;
 		//use DAO

@@ -18,7 +18,7 @@ public class TxMgmtTest {
 		System.out.println(proxy.getClass()+"      "+proxy.getClass().getSuperclass());
 		//invoke methods
 		try {
-			System.out.println(proxy.transferMoney(1003, 1010,2000));
+			System.out.println(proxy.transferMoney(1003, 1011,2000));
 		}
 		catch(Exception e) {
 			e.printStackTrace();
