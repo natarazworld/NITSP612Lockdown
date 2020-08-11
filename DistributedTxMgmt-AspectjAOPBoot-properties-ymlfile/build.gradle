@@ -1,0 +1,39 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.2.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+group = 'nit'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
+	runtimeOnly 'mysql:mysql-connector-java'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	     // https://mvnrepository.com/artifact/com.atomikos/atomikos-util
+   implementation group: 'com.atomikos', name: 'atomikos-util', version: '5.0.3'
+    // https://mvnrepository.com/artifact/com.atomikos/transactions-jta
+implementation group: 'com.atomikos', name: 'transactions-jta', version: '5.0.3'
+    // https://mvnrepository.com/artifact/com.atomikos/transactions-jdbc
+implementation group: 'com.atomikos', name: 'transactions-jdbc', version: '5.0.3'
+    // https://mvnrepository.com/artifact/javax.transaction/jta
+implementation group: 'javax.transaction', name: 'jta', version: '1.1'
+
+    // https://mvnrepository.com/artifact/org.aspectj/aspectjrt
+implementation group: 'org.aspectj', name: 'aspectjrt', version: '1.9.5'
+    // https://mvnrepository.com/artifact/org.aspectj/aspectjweaver
+implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.5'
+}
+
+test {
+	useJUnitPlatform()
+}
