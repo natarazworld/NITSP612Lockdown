@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd">
+   
+   <context:component-scan base-package="com.nt.dao"/>
+   
+   <!--  servver managed DS for oracle -->
+   <bean id="oraXADs"  class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName"  value="oraXADsJndi"/>
+   </bean>
+   
+    <!--  servver managed DS for postgresql -->
+    <bean id="pgXADs"  class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName"  value="pgDsJndi"/>
+   </bean>
+  
+  
+  
+  <!-- JdbcTemplate for oracle -->
+  <bean id="oraJt" class="org.springframework.jdbc.core.JdbcTemplate">
+     <constructor-arg ref="oraXADs"/>
+  </bean>
+  
+  <!-- JdbcTemplate for mysql -->
+  <bean id="pgJt" class="org.springframework.jdbc.core.JdbcTemplate">
+     <constructor-arg ref="pgXADs"/>
+  </bean>
+  
+  
+  
+
+</beans>
