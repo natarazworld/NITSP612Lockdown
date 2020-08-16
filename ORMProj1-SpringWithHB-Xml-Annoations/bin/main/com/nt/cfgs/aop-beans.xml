@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+      <!-- Cfg TransactionManager -->
+      <bean id="hbTxMgmr"  class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+           <property name="sessionFactory"  ref="sesfact"/>
+      </bean>
+      
+      <!-- Enable annoation driven TxMgmt -->
+      <tx:annotation-driven  transaction-manager="hbTxMgmr"/>
+
+</beans>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+     <!-- DataSorurce cfg -->
+     <bean id="hkDs"  class="com.zaxxer.hikari.HikariDataSource">
+         <property name="driverClassName"  value="oracle.jdbc.driver.OracleDriver"/>
+         <property name="jdbcUrl"  value="jdbc:oracle:thin:@localhost:1521:xe"/>
+         <property name="username" value="system"/>
+         <property name="password" value="manager"/>
+         <property name="maximumPoolSize" value="20"/>
+         <property name="minimumIdle"  value="4"/>
+     </bean>
+     
+     <!-- LocalSessionFactoryBean cfg to get SessionFactory object -->
+     <bean id="sesfact"  class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+          <property name="dataSource"  ref="hkDs"/>
+          <property name="annotatedClasses">
+             <array>
+                 <value>com.nt.entity.Project</value>
+             </array>
+          </property>
+          <property name="hibernateProperties">
+                <props>
+                    <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+                    <prop key="hibernate.hbm2ddl.auto">update</prop>
+                     <prop key="hibernate.show_sql">true</prop>
+                     <prop key="hibernate.format_sql">true</prop>
+                </props>
+          </property>
+     </bean>
+     
+     <!-- Cfg  HibernateTemplate -->
+     <bean id="template"  class="org.springframework.orm.hibernate5.HibernateTemplate">
+          <constructor-arg  ref="sesfact"/>  <!--  injects the SessionFactory object -->
+     </bean>
+
+  <!-- Link user-defined classes having annotation baased cfgs with spring bean cfg file -->
+  <context:component-scan base-package="com.nt.dao"/>
+
+</beans>
