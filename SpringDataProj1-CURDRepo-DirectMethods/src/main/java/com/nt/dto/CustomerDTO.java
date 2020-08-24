@@ -8,6 +8,16 @@ public class CustomerDTO  implements Serializable {
 	private String cname;
 	private String cadd;
 	private double billAmt;
+	
+	public CustomerDTO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public CustomerDTO(int cno) {
+		this.cno=cno;
+		System.out.println("Customer::1-param constructor");
+	}
+	
 	public Integer getCno() {
 		return cno;
 	}

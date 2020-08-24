@@ -33,6 +33,8 @@ public class Customer implements Serializable {
 		System.out.println("Customer:: 0-param constructor");
 	}
 	
+	
+	
 	public Integer getCno() {
 		return cno;
 	}
