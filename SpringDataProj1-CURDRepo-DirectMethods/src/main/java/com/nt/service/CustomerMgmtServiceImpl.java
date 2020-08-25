@@ -3,6 +3,7 @@ package com.nt.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
@@ -95,6 +96,25 @@ public class CustomerMgmtServiceImpl implements CustomerMgmtService {
 		});
 		
 		return itDTO;
+	}
+	
+	@Override
+	public Optional<CustomerDTO> fetchCustomerById(int id) {
+		Optional<Customer> optEntity=null;
+		Optional<CustomerDTO> optDTO=null;
+		
+	   //use repo
+		   optEntity=custRepo.findById(id);
+		   //convert entity to DTO
+		  
+		   if(!optEntity.isEmpty()) {
+			   optDTO=Optional.of(new CustomerDTO());
+			   BeanUtils.copyProperties(optEntity.get(),optDTO.get());
+		   }
+		   else {
+			   optDTO=optDTO.empty();
+		   }
+		return optDTO;
 	}
 
 	

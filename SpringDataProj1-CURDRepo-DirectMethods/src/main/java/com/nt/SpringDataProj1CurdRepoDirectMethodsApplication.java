@@ -1,7 +1,7 @@
 package com.nt;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -64,16 +64,29 @@ public class SpringDataProj1CurdRepoDirectMethodsApplication {
 				                                                                                                                                              new CustomerDTO(32))));
 		*/
 		
-		System.out.println("...........................");
+		//System.out.println("...........................");
 		
 	//	System.out.println("Customers count::"+service.fetchCustomerCount());
 		
-		//System.out.println(service.fetchAllCustomers());  //old  (toString())
+		/*//System.out.println(service.fetchAllCustomers());  //old  (toString())
 		  service.fetchAllCustomers().forEach(System.out::println);  //java8 method reference
 		  service.fetchAllCustomers().forEach(dt->{   //java forEach  (java8)
 			  System.out.println(dt);
 		  });
-		  
+		*/
+		
+		try {
+			Optional<CustomerDTO>  opt=service.fetchCustomerById(45);
+			if(opt.isPresent() && !opt.isEmpty()) {
+				System.out.println(opt.get());
+			}
+			else {
+				System.out.println("record not found");
+			}
+		}//try
+		catch(DataAccessException  dae) {
+			dae.printStackTrace();
+		}
 		
 
 		// close container
