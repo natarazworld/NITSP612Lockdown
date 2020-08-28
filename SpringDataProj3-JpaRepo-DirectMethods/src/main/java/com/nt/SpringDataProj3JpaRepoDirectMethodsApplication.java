@@ -10,7 +10,7 @@ import com.nt.service.CustomerMgmtService;
 
 @SpringBootApplication
 public class SpringDataProj3JpaRepoDirectMethodsApplication {
-
+    
 	public static void main(String[] args) {
 		ApplicationContext ctx = null;
 		CustomerMgmtService service = null;
