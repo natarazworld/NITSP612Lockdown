@@ -28,9 +28,11 @@ public class SpringDataProj2PASRepoDirectMethodsApplication {
 		 //service.fetchAllRecordsSortByProperty("cname", false).forEach(System.out::println);
 		/*	 System.out.println("............................................");
 			 service.fetchAllRecordsSortByProperties(false,"cname","cadd","billAmt").forEach(System.out::println);*/
-		 System.out.println("............................................");
-		 service.fetchRecordsByPageNoAndSize(3, 3).forEach(System.out::println);
-	
+		/*System.out.println("............................................");
+		service.fetchRecordsByPageNoAndSize(0, 3).forEach(System.out::println);
+		*/
+		System.out.println("................................");
+		service.fetchRecordsBypagination(4);
 		// close container
 		((ConfigurableApplicationContext) ctx).close();
 	}
