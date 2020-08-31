@@ -1,7 +1,7 @@
 package com.nt.repo;
 
 
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -39,7 +39,52 @@ public interface CustomerRepo extends  JpaRepository<Customer,Integer> {
 	
 	        // SELECT  CNO,CNAME,CADD,BILLAMT FROM CUSTOMER WHERE  CADD IS NOT NULL
 	                //Iterable<Customer> findByCaddIsNotNull();
-	                  Iterable<Customer> findByCaddNotNull();
+	                //  Iterable<Customer> findByCaddNotNull();
+	
+          	// SELECT  CNO,CNAME,CADD,BILLAMT FROM CUSTOMER WHERE  CNAME like '____'
+	              //Iterable<Customer> findByCnameLike(String chars);
+	
+	        // SELECT  CNO,CNAME,CADD,BILLAMT FROM CUSTOMER WHERE  CNAME like '_____%' 
+	            // Iterable<Customer> findByCnameLike(String chars);
+	         //------------------------ Working with more than 1 property and condition ---------------------
+	
+	     //SELECT  CNO,CNAME,CADD,BILLAMT FROM CUSTOMER WHERE  BILLAMT>=4000 AND BILLAMT<=5000
+	           //  Iterable<Customer>   findByBillAmtGreaterThanEqualAndBillAmtLessThanEqual(double min,double max);
+	
+	       //SELECT  CNO,CNAME,CADD,BILLAMT FROM CUSTOMER WHERE  BILLAMT BETWEEN(4000,6000)
+	          //  Iterable<Customer>   findByBillAmtBetween(double min,double max);
+	            
+	            //SELECT  CNO,CNAME,CADD,BILLAMT FROM CUSTOMER WHERE  CNAME='raja' OR CADD='hyd'
+	             //Iterable<Customer>   findByCnameEqualsOrCaddEquals(String name,String addrs);
+	           // Iterable<Customer>   findByCnameOrCadd(String name,String addrs);
+	
+	           //SELECT  CNO,CNAME,CADD,BILLAMT FROM CUSTOMER WHERE	BILLAMT BETWEEN(4000,5000)  ORDER BY CNAME
+	             // Iterable<Customer>   findByBillAmtBetweenOrderByCnameDesc(double min,double max);
+	
+	       //SELECT  CNO,CNAME,CADD,BILLAMT FROM CUSTOMER WHERE	CADD <> 'hyd'
+	       // SELECT  CNO,CNAME,CADD,BILLAMT FROM CUSTOMER WHERE	CADD!='hyd'
+	           //  Iterable<Customer>   findByCaddNot(String addrs);
+	
+	             //SELECT  CNO,CNAME,CADD,BILLAMT FROM CUSTOMER WHERE	CADD IN('vizag','hyd','delhi')
+	            //     Iterable<Customer>   findByCaddIn(Collection<String> cities);
+	
+	            // SELECT  CNO,CNAME,CADD,BILLAMT FROM CUSTOMER WHERE	CNAME='raja' // assume CNAME is having UK constraint
+	                 Customer   findByCname(String name);
+	
+	
+	            
+	            
+	        
+	            
+	            
+	
+	  
+	          
+	
+	
+	        
+	                  
+	                  
 	
 	
 	
