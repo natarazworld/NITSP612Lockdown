@@ -45,11 +45,11 @@ public class SpringDataProj6QueryMethods {
 		System.out.println(data1[0]+"  "+data1[1]); */
 		
 		//System.out.println("max bill Amount::"+custRepo.findMaxBillAmount());
-		Object results[]=(Object[]) custRepo.findAggregateResults();
+		/*Object results[]=(Object[]) custRepo.findAggregateResults();
 		System.out.println("max ::"+results[0]);
 		System.out.println("sum ::"+results[1]);
 		System.out.println("avg ::"+results[2]);
-		System.out.println("count ::"+results[3]);
+		System.out.println("count ::"+results[3]);*/
 		
 		 
 	/*	   double bAmt=custRepo.getBillAmtByCname("raja");
@@ -58,7 +58,15 @@ public class SpringDataProj6QueryMethods {
 		// System.out.println("no.of records updated::"+custRepo.modifyCustomerBillAmtByCity("hyd",200));
 		 //System.out.println("no.of records deleted::"+custRepo.deleteCustomersIfCaddIsNull());
 		  
+		// ---------------------native SQL ----------------------------------
+		//custRepo.getCustomerByAddrs("hyd").forEach(System.out::println);
+		//System.out.println(custRepo.getSysDate());
+		/* int count=custRepo.insertCustomer(567.88,"vizag", "suresh");
+		 System.out.println( count==0?" not inserted":" inserted");*/
 		
+		  // call PL/SQL procedure
+		 custRepo.fetchCustomerDataByAddrs("hyd").forEach(System.out::println);
+		 
 		   //close container
 		   ((ConfigurableApplicationContext) ctx).close();
 	}
