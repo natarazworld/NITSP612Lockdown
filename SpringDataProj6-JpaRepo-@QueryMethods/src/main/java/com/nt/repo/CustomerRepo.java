@@ -1,10 +1,7 @@
 package com.nt.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.nt.entity.Customer;
 
@@ -72,28 +69,34 @@ public interface CustomerRepo extends JpaRepository<Customer, Integer> {
 	   int  deleteCustomersIfCaddIsNull();*/
 
 	// --------------execute native SQL Select queries-------------------
-	//@Query(nativeQuery = true, value = "SELECT CNO,CNAME,CADD,BILL_AMT FROM CUSTOMER WHERE CADD=?")
-	//@Query(nativeQuery = true, value = "SELECT CNO,CNAME,CADD,BILL_AMT FROM CUSTOMER WHERE CADD=?1")
-	//@Query(nativeQuery = true, value = "SELECT CNO,CNAME,CADD,BILL_AMT FROM CUSTOMER WHERE CADD=:addrs")
-	//Iterable<Customer> getCustomerByAddrs(String addrs);
-	
+	// @Query(nativeQuery = true, value = "SELECT CNO,CNAME,CADD,BILL_AMT FROM
+	// CUSTOMER WHERE CADD=?")
+	// @Query(nativeQuery = true, value = "SELECT CNO,CNAME,CADD,BILL_AMT FROM
+	// CUSTOMER WHERE CADD=?1")
+	// @Query(nativeQuery = true, value = "SELECT CNO,CNAME,CADD,BILL_AMT FROM
+	// CUSTOMER WHERE CADD=:addrs")
+	// Iterable<Customer> getCustomerByAddrs(String addrs);
+
 	/*@Query(nativeQuery = true, value = "SELECT SYSDate from dual")
 	  java.util.Date    getSysDate();*/
-	
+
 	/*	@Transactional
 		@Query(nativeQuery = true, value = "INSERT INTO CUSTOMER(CNO,BILL_AMT,CADD,CNAME) VALUES(HIBERNATE_SEQUENCE.NEXTVAL,?,?,?)")
 		@Modifying
 		 int   insertCustomer(double billAmt,String addrs,String name); */
-	
-	   // --------------------------------------------------------  Calling  PL/SQL procedure with IN param --------------------------
-	    
-	   //@Query(nativeQuery = true,value= "{call GET_CUSTOMERS_BY_ADDRS(?)}")
-	   //@Query(nativeQuery = true,value= "{call GET_CUSTOMERS_BY_ADDRS(?1)}")
-	   @Query(nativeQuery = true,value= "{call GET_CUSTOMERS_BY_ADDRS(:addrs)}")
-	   Iterable<Customer>  fetchCustomerDataByAddrs(String addrs);
-	   
-	   
-	   
-	
 
+	// -------------------------------------------------------- Calling PL/SQL
+	// procedure with IN param --------------------------
+
+	// @Query(nativeQuery = true,value= "{call GET_CUSTOMERS_BY_ADDRS(?)}")
+	// @Query(nativeQuery = true,value= "{call GET_CUSTOMERS_BY_ADDRS(?1)}")
+	
+	/*@Query(nativeQuery = true,value= "{call GET_CUSTOMERS_BY_ADDRS(?)}")
+	Iterable<Customer>  fetchCustomerDataByAddrs(String addrs);*/
+	
+	/*@Procedure(value ="GET_CUSTOMERS_BY_ADDRS1" )
+	 int  fetchCustomerData1ByAddrs(String addrs);
+	*/
+
+	
 }

@@ -17,7 +17,7 @@ import com.nt.entity.Customer;
 import com.nt.repo.CustomerRepo;
 
 @SpringBootApplication
-public class SpringDataProj6QueryMethods {
+public class SpringDataProj6QueryMethods1 {
 	
 	
 	public static void main(String[] args) {
@@ -26,7 +26,7 @@ public class SpringDataProj6QueryMethods {
 		 //get IOC container
 		ctx=SpringApplication.run(SpringDataProj6QueryMethods.class, args);
 		//get Bean class object
-		custRepo=ctx.getBean(CustomerRepo.class);
+		//custRepo=ctx.getBean(CustomerRepo.class);
 		//invoke methods
 		 //custRepo.getAllCustomers().forEach(System.out::println);
 		//custRepo.getCustomersByCity("hyd").forEach(System.out::println);
@@ -69,25 +69,24 @@ public class SpringDataProj6QueryMethods {
 		 System.out.println( count==0?" not inserted":" inserted");*/
 		
 		  // call PL/SQL procedure
-		 //custRepo.fetchCustomerDataByAddrs("hyd").forEach(System.out::println);
+		// custRepo.fetchCustomerDataByAddrs("hyd").forEach(System.out::println);
 		
-		// calling PL/SQL procedure having Entity query with IN Param using Entity Manager
-		EntityManager  manager=ctx.getBean(EntityManager.class);
-		//Create StoreProcedureQuery object
-		StoredProcedureQuery procedure=manager.createStoredProcedureQuery("GET_CUSTOMERS_BY_ADDRS",Customer.class); //  procedure name, Entity class(result class)
-		//register  procedure IN  params
-		procedure.registerStoredProcedureParameter(1,String.class,ParameterMode.IN);
-		//set value to IN param
-		procedure.setParameter(1,"hyd");
-		//call PL/SQL Procedure
-		List<Customer> list=procedure.getResultList();
-		list.forEach(cust->{
-			System.out.println(cust);
-		});
+		EntityManager manager=ctx.getBean(EntityManager.class);
+	    //StoredProcedureQuery proc=manager.createStoredProcedureQuery("GET_CUSTOMERS_BY_ADDRS",Customer.class).
+		StoredProcedureQuery proc=manager.createStoredProcedureQuery("GET_CUSTOMERS_BY_ADDRS");
+	    proc.registerStoredProcedureParameter(1,String.class,ParameterMode.IN);
+	    proc.registerStoredProcedureParameter(2,Class.class,ParameterMode.REF_CURSOR);
+	    proc.setParameter(1,"hyd");
+	    //List<Customer> list=proc.getResultList();
+	   List<Object[]>list=proc.getResultList();
+	   list.forEach(row->{
+		   System.out.println(Arrays.toString(row));
+	   });
+	   
+	    
+	    manager.close();
 		
-		
-		  //close entitymanager 
-		   manager.close();
+		//System.out.println("no.of customers::"+custRepo.fetchCustomerData1ByAddrs("hyd"));
 		   //close container
 		   ((ConfigurableApplicationContext) ctx).close();
 	}
