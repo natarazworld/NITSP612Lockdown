@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-modules id="moduleCoreId" project-version="1.5.0">
-	<wb-module deploy-name="MVCProj2-Xml-WishApp-AC">
-		<property name="context-root" value="MVCProj2-Xml-WishApp-AC"/>
+	<wb-module deploy-name="MVCProj3-Xml-WishApp-AC-TwoContainers">
+		<property name="context-root" value="MVCProj3-Xml-WishApp-AC-TwoContainers"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/resources"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/java"/>
 	</wb-module>
