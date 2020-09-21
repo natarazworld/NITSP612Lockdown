@@ -4,8 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
    <!--  Handler Mapping -->
-    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/> 
-   
+    
     <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
        <property name="mappings">
              <props>
@@ -13,16 +12,22 @@
              <!--     <prop key="wish.htm">wmc</prop> -->
              </props>
        </property>
+       <property name="order" value="2"></property>
+   </bean>
+   
+   <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+      <property name="order"  value="1"/>
    </bean> 
+    
    
    
-     <bean id="shc"  class="com.nt.controller.ShowHomeController"/>
+     <bean id="shc"  class="com.nt.controller.ShowHomeController1"/>
    <!-- <bean id="wmc"  class="com.nt.controller.WishMessageController">
       <constructor-arg  ref="wishService"/>
    </bean> -->
    
    <!-- Controllers  for  BeanNAmeUrlHandlerMapping-->
-<!--    <bean id="/welcome.htm"  class="com.nt.controller.ShowHomeController"/> -->
+   <bean id="/welcome.htm"  class="com.nt.controller.ShowHomeController"/> 
    <bean id="/wish.htm"  class="com.nt.controller.WishMessageController">
       <constructor-arg  ref="wishService"/>
    </bean>
