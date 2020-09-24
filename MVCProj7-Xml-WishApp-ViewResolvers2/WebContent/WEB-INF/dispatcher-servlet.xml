@@ -7,8 +7,8 @@
    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
        <property name="mappings">
              <props>
-                 <prop key="welcome">shc</prop>
-                 <prop key="wish">wmc</prop>
+                 <prop key="welcome.htm">shc</prop>
+                 <prop key="wish.htm">wmc</prop>
              </props>
        </property>
    </bean>
@@ -21,11 +21,22 @@
    </bean>
 
     
+     <!-- View Resolver -->
+  <!--     <bean class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+         <property name="basename" value="views"/>
+         <property name="basename" value="com/nt/commons/views"/>
+     </bean>
+   -->   
+   
+     
+  
+      <bean class="org.springframework.web.servlet.view.XmlViewResolver">
+        <!--  <property name="location" value="/WEB-INF/views.xml"/> -->
+         <property name="location"  value="/WEB-INF/cfgs/views.xml"/>
+     </bean>
     
-    <!-- View Resolver -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-          <property name="prefix"  value="/WEB-INF/pages/" />
-          <property name="suffix"  value=".jsp"/>
-    </bean>
+ 
+    
+ 
 
 </beans>

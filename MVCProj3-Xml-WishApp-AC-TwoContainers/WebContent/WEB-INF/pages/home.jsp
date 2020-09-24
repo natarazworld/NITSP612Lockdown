@@ -3,5 +3,5 @@
     
     <h1 style="color:red;text-align:center"> Home page  </h1>
     
-    <h2> <a href="wish.htm">Get WishMessage</a></h2>
+    <h2> <a href="wish">Get WishMessage</a></h2>
     
