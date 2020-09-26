@@ -8,5 +8,5 @@
     <%-- <h2 style="color:red;text-align:center"> Result message is :: <c:out value="${wmsg}"/> <br>  </h2>
      --%>
     
-    <h2> <a href="welcome.htm">home</a></h2>
+    <h2> <a href="welcome">home</a></h2>
     
