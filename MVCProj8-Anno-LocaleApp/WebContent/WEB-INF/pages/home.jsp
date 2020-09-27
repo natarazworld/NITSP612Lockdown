@@ -1,6 +1,5 @@
+<%@ page isELIgnored="false"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
 
-
-<h1 style="color:blue;text-align: center;">Home page</h1>
-
-<h2><a href="countries">All  Countries</a></h2>
-
+<h1 style="color:red;text-align:center">Home page </h1>
+   <a href="countries">get All countries</a>

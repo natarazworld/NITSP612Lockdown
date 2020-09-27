@@ -1,3 +1,0 @@
-
-
-<jsp:forward page="welcome"/>
