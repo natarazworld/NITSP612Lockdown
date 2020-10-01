@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,15 +18,20 @@ public class LocaleOperationsController {
 	 @Autowired
 	private ILocaleInfoService service;
 	
-	/*@RequestMapping(value="/welcome",method=RequestMethod.GET)
+	@RequestMapping(value="/welcome",method=RequestMethod.GET)
 	public  String showHome() {
 		return "home";
-	}*/
+	}
+	
+	
+	//@RequestMapping(value="/display", method= RequestMethod.GET)
+	@GetMapping("/display")
+	public  String  viewData() {
+		System.out.println("TestController.viewData()");
+		return  "home_page";
+	}
 	 
-	 @RequestMapping("/")
-		public  String showHome() {
-			return "home";
-		}
+	 
 	
 	/*@RequestMapping(value="/countries",method=RequestMethod.GET)
 	public ModelAndView  fetchCountries() {
@@ -142,13 +148,5 @@ public class LocaleOperationsController {
 		model.addAttribute("countriesCount", countriesList.size());
 		return model;
 	}//method
-	
-	
-	
-
-	
-	
-	
-	
 	
 }//class
