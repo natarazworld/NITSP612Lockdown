@@ -3,7 +3,7 @@
 
 <h1 style="color:red;text-align:center">Student registration form page</h1>
 
-<frm:form  modelAttribute="stFrm">
+<frm:form  modelAttribute="student">
   <table  bgcolor="cyan" >
     
     <tr>     <td>Student number::   </td>  <td><frm:input   path="sno"/> </td> </tr>
