@@ -19,7 +19,7 @@ public class LoginDAOImpl implements ILoginDAO {
 		//set procedure name
 		sjc.setProcedureName("P_AUTHENTICATION");
 		//Prepare Map object haivng IN paran names and values
-		Map<String,Object> inParams=Map.of("UNAME",bo.getUname(), "PWD",bo.getPwd()); //immutable Map obj
+		Map<String,Object> inParams=Map.of("USERNAME",bo.getUname(), "PASSWORD",bo.getPwd()); //immutable Map obj
 		//call Pl/SQL procedure
 		Map<String,Object> outParams=sjc.execute(inParams);
          //get result from OUT param
