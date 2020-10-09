@@ -52,4 +52,12 @@ public class EmployeeMgmtServceImpl implements IEmployeeMgmtService {
 	  //use DAO
 		return dao.getAllDeptNos();
 	}
+
+	@Override
+	public String removeEmpByNo(int id) {
+		int count=0;
+		//use DAO
+		count=dao.deleteEmpById(id);
+		return count==0?id+" emp not found for deletion":id+"emp found and deleted";
+	}
 }//class

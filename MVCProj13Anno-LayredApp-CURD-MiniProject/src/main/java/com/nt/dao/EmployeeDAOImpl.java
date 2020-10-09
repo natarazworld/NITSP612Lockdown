@@ -23,6 +23,7 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
 	private static final String  GET_ALL_EMPLOYEES="SELECT EMPNO,ENAME,JOB,SAL,DEPTNO FROM EMP";
 	private static final String  INSERT_EMPLOYEE="INSERT INTO EMP(EMPNO,ENAME,JOB,SAL,DEPTNO) VALUES(ENO_SEQ.NEXTVAL,?,?,?,?)";
 	private static final String  GET_ALL_DEPTNOS="SELECT DISTINCT DEPTNO FROM EMP  WHERE DEPTNO IS NOT NULL";
+	private static final String  DELETE_EMP_BY_NO="DELETE  FROM EMP WHERE EMPNO=?";
 	
 	@Autowired
 	private JdbcTemplate jt;
@@ -72,6 +73,13 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
 			deptNosList.add((Integer) ((BigDecimal)e.get("deptNo")).intValue());
 		});
 		return deptNosList;
+	}
+
+	@Override
+	public int deleteEmpById(int id) {
+	     int count=0;
+	     count=jt.update(DELETE_EMP_BY_NO,id);
+		return count;
 	}
 	
 }//DAO class

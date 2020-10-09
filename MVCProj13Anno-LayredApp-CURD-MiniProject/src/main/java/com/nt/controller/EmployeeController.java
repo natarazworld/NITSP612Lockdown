@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nt.dto.EmployeeDTO;
 import com.nt.model.Employee;
@@ -35,14 +37,14 @@ public class EmployeeController {
 		return "show_report";
 	}
 	
-	@GetMapping("/saveEmp.htm")
+	@GetMapping("/saveEmp.htm")  //for initial request
 	public String  showEmpRegistrationPage(@ModelAttribute("empFrm") Employee emp) {
 		System.out.println("EmployeeController.showEmpRegistrationPage()");
 		return "employee_register";
 	}
 	
-	@PostMapping("/saveEmp.htm")
-	public  String  saveEmployee(Map<String,Object> map, @ModelAttribute("empFrm") Employee emp){
+	@PostMapping("/saveEmp.htm")  //for post back request
+	public  String  saveEmployee(RedirectAttributes redirect, @ModelAttribute("empFrm") Employee emp){
 		System.out.println("EmployeeController.saveEmployee()");
 		EmployeeDTO dto=null;
 		String result=null;
@@ -52,13 +54,21 @@ public class EmployeeController {
 		BeanUtils.copyProperties(emp,dto);
 		//use Service
 		result=service.registerEmployee(dto);
-		listDTO=service.fetchAllEmployees();
-		//keep in  mode attribute (map obj)
-		map.put("resultMsg",result);
-		map.put("empsInfo", listDTO);
+		//keep in results  in flash attribute (special Map object)
+		  redirect.addFlashAttribute("resultMsg",result);
 		//return lvn
-		return "show_report";
+		return "redirect:list_emps.htm";
 		
+	}
+	
+	@GetMapping("/deleteEmp.htm")
+	public   String   removeEmployee(RedirectAttributes redirect,@RequestParam int eno) {
+		String result=null;
+		 //use service
+		result=service.removeEmpByNo(eno);
+		//add result to flash attribute
+		 redirect.addFlashAttribute("resultMsg",result);
+		return "redirect:list_emps.htm";
 	}
 	
 	@ModelAttribute("deptsInfo")  //constructing reference data/initial for select box
