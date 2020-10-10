@@ -71,6 +71,37 @@ public class EmployeeController {
 		return "redirect:list_emps.htm";
 	}
 	
+	@GetMapping("/editEmp.htm")
+	public String  showEditFormPage(@ModelAttribute Employee emp,
+			                                                 @RequestParam int eno) {
+		EmployeeDTO dto=null;
+		//use service
+		dto=service.fetchEmpByNo(eno);
+		//convert dto to model
+		 BeanUtils.copyProperties(dto, emp);
+		//return lvn
+		return "employee_edit";
+	}
+	
+	
+	@PostMapping("/editEmp.htm")
+	public String  updateEmployee(@ModelAttribute Employee employee,
+			                                                 RedirectAttributes redirect) {
+		EmployeeDTO dto=null;
+		String result=null;
+		//convert mode to dto
+		dto=new EmployeeDTO();
+		BeanUtils.copyProperties(employee,dto);
+		//use service
+		result=service.modifyEmployeeByNo(dto);
+		//add to flash attrbute
+		redirect.addFlashAttribute("resultMsg",result);
+		//perform redirection
+		return "redirect:list_emps.htm";
+	}
+	
+	
+	
 	@ModelAttribute("deptsInfo")  //constructing reference data/initial for select box
 	public List<Integer>  populateDeptNos(){
 		System.out.println("EmployeeController.populateDeptNos()");

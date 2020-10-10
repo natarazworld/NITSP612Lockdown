@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class EmployeeDTO implements Serializable {
 	private int serialNo;
-	private int empNo;
+	private Integer empNo;
 	private String ename;
 	private String job;
 	private float sal;
@@ -12,11 +12,11 @@ public class EmployeeDTO implements Serializable {
 	private float grossSalary;
 	private float netSalary;
 
-	public int getEmpNo() {
+	public Integer getEmpNo() {
 		return empNo;
 	}
 
-	public void setEmpNo(int empNo) {
+	public void setEmpNo(Integer empNo) {
 		this.empNo = empNo;
 	}
 

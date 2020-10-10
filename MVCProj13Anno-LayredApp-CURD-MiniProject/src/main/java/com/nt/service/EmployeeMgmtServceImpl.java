@@ -60,4 +60,29 @@ public class EmployeeMgmtServceImpl implements IEmployeeMgmtService {
 		count=dao.deleteEmpById(id);
 		return count==0?id+" emp not found for deletion":id+"emp found and deleted";
 	}
+	@Override
+	public EmployeeDTO fetchEmpByNo(int id) {
+		EmployeeDTO dto=null;
+		EmployeeBO bo=null;
+	    //use DAO
+		bo=dao.getEmpById(id);
+		// convert bo  to dto
+		dto=new EmployeeDTO();
+		BeanUtils.copyProperties(bo, dto);
+		return dto;
+	}
+	
+	@Override
+	public String modifyEmployeeByNo(EmployeeDTO dto) {
+		System.out.println(dto);
+		EmployeeBO bo=null;
+		int count=0;
+		//convert dto to bo
+		bo=new EmployeeBO();
+		BeanUtils.copyProperties(dto, bo);
+		//use service
+		count=dao.updateEmployee(bo);
+		return count==0?dto.getEmpNo()+"  employee details not found to update":dto.getEmpNo()+"  employee details are found to update";
+	}
+	
 }//class

@@ -9,4 +9,6 @@ public interface IEmployeeDAO {
     public  int  insertEmployee(EmployeeBO bo);
     public  List<Integer>  getAllDeptNos();
     public   int   deleteEmpById(int id);
+    public EmployeeBO  getEmpById(int id);
+    public  int   updateEmployee(EmployeeBO bo);
 }

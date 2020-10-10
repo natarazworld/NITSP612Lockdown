@@ -1,6 +1,7 @@
 package com.nt.model;
 
 public class Employee {
+	private Integer empNo;
     private String ename;
     private String job;
     private Float sal;
@@ -8,6 +9,18 @@ public class Employee {
     
     
     
+	public Integer getEmpNo() {
+		return empNo;
+	}
+
+
+
+	public void setEmpNo(Integer empNo) {
+		this.empNo = empNo;
+	}
+
+
+
 	public String getEname() {
 		return ename;
 	}

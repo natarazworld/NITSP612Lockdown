@@ -1,15 +1,15 @@
 package com.nt.bo;
 
 public class EmployeeBO {
-   private  int empNo;
+   private  Integer empNo;
    private  String ename;
    private  String job;
-   private  float sal;
+   private   float sal;
    private  int deptNo;
-public int getEmpNo() {
+public Integer getEmpNo() {
 	return empNo;
 }
-public void setEmpNo(int empNo) {
+public void setEmpNo(Integer empNo) {
 	this.empNo = empNo;
 }
 public String getEname() {

@@ -9,4 +9,6 @@ public interface IEmployeeMgmtService {
     public  String  registerEmployee(EmployeeDTO dto);
     public  List<Integer>  fetchAllDeptNos();
     public String     removeEmpByNo(int id);
+    public EmployeeDTO fetchEmpByNo(int id);  
+    public String  modifyEmployeeByNo(EmployeeDTO dto);
 }
