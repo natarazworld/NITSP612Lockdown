@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nt.bo.EmployeeBO;
 import com.nt.dao.IEmployeeDAO;
@@ -17,6 +19,7 @@ public class EmployeeMgmtServceImpl implements IEmployeeMgmtService {
     private  IEmployeeDAO dao;
 	
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,readOnly = true)
 	public List<EmployeeDTO> fetchAllEmployees() {
 		List<EmployeeBO> listBO=null;
 		List<EmployeeDTO> listDTO=new ArrayList();
@@ -36,6 +39,7 @@ public class EmployeeMgmtServceImpl implements IEmployeeMgmtService {
 	}//method
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,readOnly = false)
 	public String registerEmployee(EmployeeDTO dto) {
 		EmployeeBO bo=null;
 		int count=0;
@@ -48,12 +52,14 @@ public class EmployeeMgmtServceImpl implements IEmployeeMgmtService {
 	}
 	
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,readOnly = true)
 	public List<Integer> fetchAllDeptNos() {
 	  //use DAO
 		return dao.getAllDeptNos();
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,readOnly = false)
 	public String removeEmpByNo(int id) {
 		int count=0;
 		//use DAO
@@ -61,6 +67,7 @@ public class EmployeeMgmtServceImpl implements IEmployeeMgmtService {
 		return count==0?id+" emp not found for deletion":id+"emp found and deleted";
 	}
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,readOnly = true)
 	public EmployeeDTO fetchEmpByNo(int id) {
 		EmployeeDTO dto=null;
 		EmployeeBO bo=null;
@@ -73,6 +80,7 @@ public class EmployeeMgmtServceImpl implements IEmployeeMgmtService {
 	}
 	
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,readOnly = false)
 	public String modifyEmployeeByNo(EmployeeDTO dto) {
 		System.out.println(dto);
 		EmployeeBO bo=null;

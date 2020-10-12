@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,11 +16,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.nt.dto.EmployeeDTO;
 import com.nt.model.Employee;
 import com.nt.service.IEmployeeMgmtService;
+import com.nt.validator.EmployeeValidator;
 
 @Controller
 public class EmployeeController {
 	@Autowired
 	private  IEmployeeMgmtService service;
+	@Autowired
+	private EmployeeValidator validator;
 	
 	
 	@GetMapping("/welcome.htm")
@@ -44,11 +48,31 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/saveEmp.htm")  //for post back request
-	public  String  saveEmployee(RedirectAttributes redirect, @ModelAttribute("empFrm") Employee emp){
+	public  String  saveEmployee(RedirectAttributes redirect, 
+			                                         @ModelAttribute("empFrm") Employee emp,
+			                                         BindingResult errors){
 		System.out.println("EmployeeController.saveEmployee()");
 		EmployeeDTO dto=null;
 		String result=null;
 		List<EmployeeDTO> listDTO=null;
+	
+		System.out.println("vflag ::"+emp.getVflag());
+		if(emp.getVflag().equalsIgnoreCase("no")) {  //enable server side form validations only when client form   validations are not done
+		   //peform form validations
+		   if(validator.supports(emp.getClass()))
+			    validator.validate(emp, errors);
+		}
+		
+		
+		//b.logic errors or application logic errors
+		if(emp.getJob().equalsIgnoreCase("netaji") || emp.getJob().equalsIgnoreCase("actor"))
+			errors.rejectValue("job", "blocked.jobs");
+
+		
+		 //if form validation errors are there.. launch form page
+		if(errors.hasErrors())
+			  return "employee_register";
+		
 		//convert model to dto
 		dto=new EmployeeDTO();
 		BeanUtils.copyProperties(emp,dto);
@@ -73,10 +97,10 @@ public class EmployeeController {
 	
 	@GetMapping("/editEmp.htm")
 	public String  showEditFormPage(@ModelAttribute Employee emp,
-			                                                 @RequestParam int eno) {
+			                                                 @RequestParam int empNo) {
 		EmployeeDTO dto=null;
 		//use service
-		dto=service.fetchEmpByNo(eno);
+		dto=service.fetchEmpByNo(empNo);
 		//convert dto to model
 		 BeanUtils.copyProperties(dto, emp);
 		//return lvn
@@ -85,10 +109,31 @@ public class EmployeeController {
 	
 	
 	@PostMapping("/editEmp.htm")
-	public String  updateEmployee(@ModelAttribute Employee employee,
-			                                                 RedirectAttributes redirect) {
+	public String  updateEmployee(
+			                                       RedirectAttributes redirect,
+			                                       @ModelAttribute Employee employee,
+			                                                 BindingResult errors) {
+		System.out.println(employee.toString());
 		EmployeeDTO dto=null;
 		String result=null;
+	System.out.println("vflag ::"+employee.getVflag());
+	if(employee.getVflag().equalsIgnoreCase("no")) {  //enable server side form validations only when client form   validations are not done	
+		//peform form validations
+		if(validator.supports(employee.getClass()))
+			validator.validate(employee, errors);
+	}//if
+		
+		//b.logic error or application logic errors
+			if(employee.getJob().equalsIgnoreCase("netaji") || employee.getJob().equalsIgnoreCase("actor"))
+					errors.rejectValue("job", "blocked.jobs");
+
+		
+		 //if form validation errors are there.. launch form page
+		if(errors.hasErrors())
+			  return "employee_edit";
+		
+		
+		
 		//convert mode to dto
 		dto=new EmployeeDTO();
 		BeanUtils.copyProperties(employee,dto);

@@ -4,7 +4,9 @@
 </head>
 <div class="container">
 <h1 class="text-primary text-center"> Employees Editing page </h1>
-<frm:form  modelAttribute="employee">
+<script language="JavaScript" src="js/validation.js">
+</script>
+<frm:form  action="editEmp.htm"  modelAttribute="employee" onsubmit="return  validate(this)">
    <table class="table table-responsive " bgcolor="pink" >
    <tr>
         <td>Employee id:: </td>
@@ -12,26 +14,26 @@
       </tr>
       <tr>
         <td>Employee name :: </td>
-        <td> <frm:input path="ename"/>  </td>
+        <td> <frm:input path="ename"/> <frm:errors  path="ename"  cssClass="text-danger"/><span id="enameId"></span> </td>
       </tr>
       <tr>
         <td>Employee desg :: </td>
-        <td> <frm:input path="job"/>  </td>
+        <td> <frm:input path="job"/> <frm:errors  path="job"  cssClass="text-danger"/> <span id="jobId"></span>  </td>
       </tr>
       <tr>
         <td>Employee salary :: </td>
-        <td> <frm:input path="sal"/>  </td>
+        <td> <frm:input path="sal"/>  <frm:errors  path="sal"  cssClass="text-danger"/> <span id="salId"></span> </td>
       </tr>
       <tr>
         <td>Employee deptno :: </td>
         <td>  <frm:select path="deptNo">
                     <frm:options items="${deptsInfo}"/>
              </frm:select> 
-        
              </td>  
       </tr>
       <tr>
-        <td colspan="2" > <input type="submit"  value="update Employee"> </td> 
+       <td><frm:hidden path="vflag"/> </td>
+        <td > <input type="submit"  value="update Employee"> </td>
       </tr>
       
    </table>

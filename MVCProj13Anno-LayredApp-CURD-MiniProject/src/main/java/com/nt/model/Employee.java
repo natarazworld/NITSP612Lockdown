@@ -4,9 +4,9 @@ public class Employee {
 	private Integer empNo;
     private String ename;
     private String job;
-    private Float sal;
+    private Float sal=10000.0f;
     private Integer deptNo=10;
-    
+    private String  vflag="no";
     
     
 	public Integer getEmpNo() {
@@ -65,6 +65,18 @@ public class Employee {
 
 	public void setDeptNo(Integer deptNo) {
 		this.deptNo = deptNo;
+	}
+
+
+
+	public String getVflag() {
+		return vflag;
+	}
+
+
+
+	public void setVflag(String vflag) {
+		this.vflag = vflag;
 	}
 
 

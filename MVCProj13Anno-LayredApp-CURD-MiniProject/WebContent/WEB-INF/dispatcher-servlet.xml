@@ -9,12 +9,17 @@
   <!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/> -->
   
   <!-- Controllers -->
-   <context:component-scan base-package="com.nt.controller"/>
+   <context:component-scan base-package="com.nt.controller,com.nt.validator"/>
   
   <!-- ViewResolver cfg -->
   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
       <property name="prefix" value="/WEB-INF/pages/"/>
       <property name="suffix"  value=".jsp"/>
+  </bean>
+  
+  <!-- properites file -->
+  <bean id="messageSource"  class="org.springframework.context.support.ResourceBundleMessageSource">
+      <property name="basename"  value="com/nt/commons/validation"/>
   </bean>
 
 </beans>

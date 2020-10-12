@@ -32,7 +32,7 @@
                       <td>${dto.deptNo}  </td>
                       
                       <td>
-                          <a href="editEmp.htm?eno=${dto.empNo}"><img src="images/edit1.png" width="50" height="50"/></a>
+                          <a href="editEmp.htm?empNo=${dto.empNo}"><img src="images/edit1.png" width="50" height="50"/></a>
                           <a href="deleteEmp.htm?eno=${dto.empNo}"  onclick="confirm('are u sure delete ${dto.ename}')"><img src="images/delete1.jpg" width="50" height="50"/></a>
                         </td>
                       
