@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+ 
+  <!-- Handler Mapping -->
+   <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+       <property name="interceptors">
+            <array>
+               <ref bean="lci"/>
+            </array>
+       </property>
+   </bean> 
+  
+  <!-- Cfg propertie file -->
+    <bean id="messageSource"  class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="com/nt/commons/App"/>
+    </bean>
+    
+   <!-- Cfg Resolver to enable I18n on the Application -->
+   <bean id="localeResolver"  class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+      <property name="defaultLocale"  value="en"/>
+   </bean> 
+   
+   <!-- Cfg LocalChangeInterceptor to chanage Local settings for every request -->
+   <bean id="lci"  class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <property name="paramName" value="lang"/>
+   </bean>
+   
+  <!-- Controllers -->
+   <context:component-scan base-package="com.nt.controller"/>
+  
+   
+  <!-- ViewResolver cfg -->
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="/WEB-INF/pages/"/>
+      <property name="suffix"  value=".jsp"/>
+  </bean>
+  
+
+</beans>
