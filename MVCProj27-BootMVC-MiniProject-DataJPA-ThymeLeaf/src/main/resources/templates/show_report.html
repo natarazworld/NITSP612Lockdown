@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html     xmlns:th="http://www.thymeleaf.org">
+<h1 class="text-primary text-center"> Employees Info Report </h1>
+<head>
+   <link th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}"  rel="stylesheet">
+</head>
+<div class="container">
+   <div th:if="${empsInfo!=null}">
+        <table class="table  table-hover table-bordered  table-stripped table-sm">
+             <tr class="text-primary">
+               <th>SerialNo </th>
+               <th>EmpNo </th>
+               <th>EmpName </th>
+               <th>Desg </th>
+               <th>Salary </th>
+               <th>GrorssSalary </th>
+               <th>NetSalary </th>
+               <th>DeptNo </th>
+               <th>Operations </th>
+              </tr>
+                  <tr th:each="dto:${empsInfo}" class="text-primary" >
+                      <td th:text="${dto.serialNo}"/>
+                      <td th:text="${dto.empNo}"/>
+                      <td th:text="${dto.ename}"/>
+                      <td th:text="${dto.job}"/>
+                      <td th:text="${dto.sal}"/>
+                      <td th:text="${dto.grossSalary}"/>
+                        <td th:text="${dto.netSalary}"/>
+                       <td th:text="${dto.deptNo}"/>
+                      <td>
+                          <a th:href="@{/employee/editEmp.htm(empNo=${dto.empNo})}"><img th:src="@{/images/edit1.png}" width="50" height="50"/></a>
+                          <a th:href="@{/employee/deleteEmp.htm(empNo=${dto.empNo})}"  onclick="return confirm('are u sure delete ${dto.ename}')"><img th:src="@{/images/delete1.jpg}" width="50" height="50"/></a>
+                        </td>
+                   </tr>
+        </table>
+        </div>
+    <span th:unless="${empsInfo!=null}">   <h1 >Records not found</h1> </span>
+ <br><br>
+ 
+  <span th:if="${resultMsg!=null}"> <marquee direction="right"><h1 class="text-primary font-weight-bold" th:text="${resultMsg}"/> </marquee> </span>
+   
+<h2><a th:href="@{/employee/saveEmp.htm}"><img th:src="@{/images/add1.jpg}" width="100" height="100"/></a> 
+    &nbsp; &nbsp;<a th:href="@{/employee/welcome.htm}"><img th:src="@{/images/home.gif}" width="100" height="100"/></a>
+    &nbsp; &nbsp;<a  href="JavaScript:doPrint()"><img th:src="@{/images/print1.jpg}" width="100" height="100"></a>
+</h2>
+      
+</div>
+ <script language="JavaScript" >
+      function doPrint(){
+    	  frames.focus();
+    	  frames.print();
+      }
+ </script>
+</html>
+  
+
+
