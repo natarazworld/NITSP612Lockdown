@@ -1,38 +1,39 @@
-<%@taglib uri="http://www.springframework.org/tags/form"  prefix="frm"%>
+<!DOCTYPE html>
+<html     xmlns:th="http://www.thymeleaf.org">
 <head>
-   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"  rel="stylesheet">
+   <link th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}"  rel="stylesheet">
    
 </head>
 <div class="container">
 <h1 class="text-primary text-center"> Employees Registration page </h1>
-<script language="JavaScript" src="js/validation.js">
+<script language="JavaScript" th:src="@{/js/validation.js}" >
 </script>
-<frm:form  modelAttribute="empFrm"   onsubmit="return validate(this)">
+<form  th:object="${empFrm}"   onsubmit="return validate(this)"  method="POST">
    <table class="table table-responsive " bgcolor="cyan" >
       <tr>
         <td>Employee name :: </td>
-        <td> <frm:input path="ename"/> <frm:errors  cssClass="text-danger" path="ename"/> <span  id="enameId"></span> </td>
+        <td> <input type="text" th:field="*{ename}"/> <span   class="text-danger"  th:errors="*{ename}"/> <span  id="enameId"></span> </td>
       </tr>
       <tr>
         <td>Employee desg :: </td>
-        <td> <frm:input path="job"/> <frm:errors   cssClass="text-danger" path="job"/> <span  id="jobId"></span> </td>
+        <td> <input type="text" th:field="*{job}"/> <span   class="text-danger" th:errors="*{job}"/> <span  id="jobId"></span> </td>
       </tr>
       <tr>
         <td>Employee salary :: </td>
-        <td> <frm:input path="sal"/> <frm:errors  cssClass="text-danger" path="sal"/> <span  id="salId"></span>  </td>
+        <td> <input type="text" th:field="*{sal}"/> <span  class="text-danger"  th:errors="*{sal}"/> <span  id="salId"></span>  </td>
       </tr>
       <tr>
         <td>Employee deptno :: </td>
-        <td>  <frm:select path="deptNo">
-                    <frm:options items="${deptsInfo}"/>
-             </frm:select> 
+        <td>  <select th:field="*{deptNo}">
+                    <option th:each="dno:${deptsInfo}" th:value="${dno}" th:text="${dno}" th:selected="10" />
+             </select> 
              </td>  
       </tr>
       <tr>
-          <td><frm:hidden path="vflag"/> </td> 
+          <td><input type="hidden" th:field="*{vflag}"/> </td> 
         <td  > <input type="submit"  value="register"> </td> 
       </tr>
    </table>
-    
-</frm:form>
+</form>
  </div>
+ </html>

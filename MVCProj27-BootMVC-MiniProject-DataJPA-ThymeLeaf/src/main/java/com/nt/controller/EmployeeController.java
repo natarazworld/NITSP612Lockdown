@@ -44,13 +44,13 @@ public class EmployeeController {
 		return "show_report";
 	}
 	
-	@GetMapping("/saveEmp.htm")  //for initial request
+	@GetMapping("/saveEmp")  //for initial request
 	public String  showEmpRegistrationPage(@ModelAttribute("empFrm") Employee emp) {
 		System.out.println("EmployeeController.showEmpRegistrationPage()");
 		return "employee_register";
 	}
 	
-	@PostMapping("/saveEmp.htm")  //for post back request
+	@PostMapping("/saveEmp")  //for post back request
 	public  String  saveEmployee(RedirectAttributes redirect, 
 			                                         @ModelAttribute("empFrm") Employee emp,
 			                                         BindingResult errors){
